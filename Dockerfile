@@ -16,7 +16,7 @@ RUN npm run build
 
 # --- STAGE 2: Final Image (Imagem Final do Appsmith) ---
 ARG BASE=appsmith/appsmith-ce:v1.42
-FROM ${BASE}
+FROM appsmith/appsmith-ce:v1.42
 
 ENV IN_DOCKER=1
 

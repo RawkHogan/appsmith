@@ -1,6 +1,7 @@
 # --- STAGE 1: Builder (Construção do Frontend) ---
-FROM node:20 AS builder  # Alterado para node:20
+FROM node:20 AS builder  
 
+# Alterado para node:20
 WORKDIR /appsmith-source
 
 # Copia as definições de dependência do frontend

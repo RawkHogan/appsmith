@@ -1,5 +1,4 @@
-ARG BASE
-FROM ${BASE}
+FROM node:16
 
 ENV IN_DOCKER=1
 

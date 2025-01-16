@@ -1,7 +1,6 @@
 # --- STAGE 1: Builder (Construção do Frontend) ---
-FROM node:20 AS builder  
+FROM node:20 AS builder
 
-# Alterado para node:20
 WORKDIR /appsmith-source
 
 # Copia as definições de dependência do frontend
@@ -9,6 +8,8 @@ COPY app/client/package*.json app/client/
 WORKDIR /appsmith-source/app/client
 # Atualiza o npm para a versão mais recente para suportar workspace:
 RUN npm install -g npm@latest
+# Limpa o cache do npm
+RUN npm cache clean --force
 RUN npm install
 
 # Copia o restante do código-fonte do frontend
@@ -60,9 +61,9 @@ RUN <<END
   # Desativa bits setuid/setgid (segurança)
   find / \( -path /proc -prune \) -o \( \( -perm -2000 -o -perm -4000 \) -exec chmod -s '{}' + \) || true
 
-  mkdir -p /.mongodb/mongosh /appsmith-stacks
-  chmod ugo+w /etc /appsmith-stacks
-  chmod -R ugo+w /var/run /.mongodb /etc/ssl /usr/local/share
+mkdir -p /.mongodb/mongosh /appsmith-stacks
+chmod ugo+w /etc /appsmith-stacks
+chmod -R ugo+w /var/run /.mongodb /etc/ssl /usr/local/share
 END
 
 LABEL com.centurylinklabs.watchtower.lifecycle.pre-check=/watchtower-hooks/pre-check.sh

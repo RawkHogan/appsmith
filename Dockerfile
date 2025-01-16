@@ -1,5 +1,5 @@
 # --- STAGE 1: Builder (Construção do Frontend) ---
-FROM node:16 AS builder
+FROM node:20 AS builder  # Alterado para node:20
 
 WORKDIR /appsmith-source
 

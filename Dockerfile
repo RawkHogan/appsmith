@@ -1,4 +1,5 @@
-FROM node:16
+ARG BASE=appsmith/appsmith-ce:v1.42
+FROM ${BASE}
 
 ENV IN_DOCKER=1
 

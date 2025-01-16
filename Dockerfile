@@ -6,6 +6,8 @@ WORKDIR /appsmith-source
 # Copia as definições de dependência do frontend
 COPY app/client/package*.json app/client/
 WORKDIR /appsmith-source/app/client
+# Atualiza o npm para a versão mais recente para suportar workspace:
+RUN npm install -g npm@latest
 RUN npm install
 
 # Copia o restante do código-fonte do frontend
@@ -15,7 +17,6 @@ COPY app/client/ .
 RUN npm run build
 
 # --- STAGE 2: Final Image (Imagem Final do Appsmith) ---
-ARG BASE=appsmith/appsmith-ce:v1.42
 FROM appsmith/appsmith-ce:v1.42
 
 ENV IN_DOCKER=1
